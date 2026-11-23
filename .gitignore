@@ -1,0 +1,13 @@
+# Local values and secrets.
+stack/.env
+stack/deploy.env
+stack/homeassistant/secrets.yaml
+
+# Data the containers write.
+stack/homeassistant/www/potty/
+stack/poop-checker/data/
+tools/synth/data/
+
+__pycache__/
+*.pyc
+tools/synth/poop_sources.json

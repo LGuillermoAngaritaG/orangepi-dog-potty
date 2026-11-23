@@ -1,0 +1,89 @@
+<mxfile host="gridgram" agent="improved-drawio">
+  <diagram name="Page-1" id="page1">
+    <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" math="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Training data: from answers to a model" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;whiteSpace=wrap;align=left;verticalAlign=middle;fontStyle=1;fontSize=17;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="20" y="15" width="860" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="header_collect" value="COLLECT" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;whiteSpace=wrap;align=center;verticalAlign=middle;fontStyle=1;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="20" y="50" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="header_label" value="LABEL" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;whiteSpace=wrap;align=center;verticalAlign=middle;fontStyle=1;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="246" y="50" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="header_train" value="TRAIN" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;whiteSpace=wrap;align=center;verticalAlign=middle;fontStyle=1;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="472" y="50" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="header_use" value="USE" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;whiteSpace=wrap;align=center;verticalAlign=middle;fontStyle=1;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="698" y="50" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="header_rule" value="" style="line;html=1;strokeWidth=1;strokeColor=#D1D5DB;" vertex="1" parent="1">
+          <mxGeometry x="20" y="68" width="860" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="box_check_photos" value="&lt;b&gt;Check photos&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;one per visit: crop&lt;br&gt;and full frame&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="20" y="80" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="box_empty_patio_frames" value="&lt;b&gt;Empty patio frames&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;every 30 min,&lt;br&gt;day and night&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="20" y="190" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="box_your_answers" value="&lt;b&gt;Your answers&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;Clean or Poop, from the&lt;br&gt;phone or History tab&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="246" y="80" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="box_synthetic_images" value="&lt;b&gt;Synthetic images&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;real poop cut-outs, or an&lt;br&gt;image model on a floor patch&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FCEFD5;strokeColor=#B7791F;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="246" y="190" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="box_train_py_on_a_pc" value="&lt;b&gt;train.py on a PC&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;YOLO11n classifier, 320 px;&lt;br&gt;needs 20 poop photos&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FCEFD5;strokeColor=#B7791F;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="472" y="80" width="180" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="box_model_onnx" value="&lt;b&gt;model.onnx&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;copied to the Pi, used&lt;br&gt;from the next check&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E8EDF6;strokeColor=#4A6FA5;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="698" y="80" width="180" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_check_photos_your_answers" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_check_photos" target="box_your_answers">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_empty_patio_frames_synthetic_ima" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_empty_patio_frames" target="box_synthetic_images">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_your_answers_train_py_on_a_pc" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.2105;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_your_answers" target="box_train_py_on_a_pc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_your_answers_train_py_on_a_pc_label" value="dataset/" vertex="1" connectable="0" parent="edge_your_answers_train_py_on_a_pc" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Helvetica;fontSize=11;fontColor=#5B6472;labelBackgroundColor=none;">
+          <mxGeometry x="0" y="17.7" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_synthetic_images_train_py_on_a_p" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.7895;entryDx=0;entryDy=0;dashed=1;dashPattern=4 3;" edge="1" parent="1" source="box_synthetic_images" target="box_train_py_on_a_pc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_synthetic_images_train_py_on_a_p_label" value="not yet" vertex="1" connectable="0" parent="edge_synthetic_images_train_py_on_a_p" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Helvetica;fontSize=11;fontColor=#5B6472;labelBackgroundColor=none;">
+          <mxGeometry x="0" y="17.7" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_train_py_on_a_pc_model_onnx" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_train_py_on_a_pc" target="box_model_onnx">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_live" value="" style="rounded=1;absoluteArcSize=1;arcSize=6;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;" vertex="1" parent="1">
+          <mxGeometry x="20" y="294" width="20" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_text_live" value="Running" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;align=left;verticalAlign=middle;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="46" y="290" width="48.04" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_built" value="" style="rounded=1;absoluteArcSize=1;arcSize=6;html=1;fillColor=#FCEFD5;strokeColor=#B7791F;" vertex="1" parent="1">
+          <mxGeometry x="108.04" y="294" width="20" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_text_built" value="Built and tested" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;align=left;verticalAlign=middle;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="134.04" y="290" width="99.52" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_prop" value="" style="rounded=1;absoluteArcSize=1;arcSize=6;html=1;fillColor=#E8EDF6;strokeColor=#4A6FA5;" vertex="1" parent="1">
+          <mxGeometry x="247.56" y="294" width="20" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_text_prop" value="Not trained yet" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;align=left;verticalAlign=middle;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="273.56" y="290" width="93.8" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

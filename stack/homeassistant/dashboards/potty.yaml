@@ -1,0 +1,174 @@
+# The Potty page: the newest check photo and the answer buttons. The phone
+# notification opens it when tapped, because iOS never loaded the photo inside
+# the notification itself. Deployed to /config/dashboards/potty.yaml.
+title: Potty
+views:
+  - title: Photo
+    path: photo
+    icon: mdi:camera
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            content: |
+              {%- set shot = states('input_text.potty_last_shot') -%}
+              {%- set answer = states('input_text.potty_last_answer') -%}
+              {%- set taken = state_attr('input_datetime.potty_last_check', 'timestamp') or 0 -%}
+              {%- set window = states('input_number.potty_answer_window_minutes') | int(15) -%}
+              {%- set left = window * 60 - (now().timestamp() - taken) -%}
+              {%- if shot in ['', 'unknown', 'unavailable'] -%}
+              No check photo yet. It shows up here after the dog's next visit.
+              {%- else -%}
+              **Check photo, {{ taken | timestamp_custom('%d/%m %H:%M') }}**
+
+              {% if answer == 'clean' %}Answered: clean.
+              {%- elif answer == 'poop' %}Answered: poop.
+              {%- elif answer == 'auto' %}The model saw no poop and rinsed.
+              {%- elif is_state('input_boolean.potty_pause_hose', 'on') %}Not answered yet. The hose is paused in Settings, so *Clean - rinse* only saves the label.
+              {%- elif left > 0 %}Not answered yet. *Clean - rinse* rinses until {{ (taken + window * 60) | timestamp_custom('%H:%M') }}.
+              {%- else %}Not answered yet. More than {{ window }} minutes have passed, so *Clean - rinse* only saves the label.
+              {%- endif %}
+
+              ![Check photo](/local/potty/{{ shot }}.jpg)
+              {%- endif %}
+
+          - type: horizontal-stack
+            cards:
+              - type: button
+                name: Clean - rinse
+                icon: mdi:water
+                tap_action:
+                  action: perform-action
+                  perform_action: script.potty_handle_answer
+                  data:
+                    answer: RINSE
+              - type: button
+                name: Poop
+                icon: mdi:emoticon-poop
+                tap_action:
+                  action: perform-action
+                  perform_action: script.potty_handle_answer
+                  data:
+                    answer: POOP
+
+  # The last 30 check photos with the answer and what the hose did, and
+  # Clean / Poop / Delete buttons on each (www/potty-history-card.js). Hose
+  # entries start on 2026-11-23; older photos show "—". Clean here only files
+  # the label: rinsing stays on the Photo tab.
+  - title: History
+    path: history
+    icon: mdi:history
+    cards:
+      - type: custom:potty-history-card
+
+  # Switches, timers and the project description.
+  - title: Settings
+    path: settings
+    icon: mdi:cog
+    cards:
+      - type: markdown
+        title: Status
+        content: |
+          {%- set taken = state_attr('input_datetime.potty_last_check', 'timestamp') -%}
+          {%- set labeled = state_attr('sensor.potty_labeled_photos', 'labeled') or {} -%}
+          {%- set rinse = states('input_number.potty_rinse_seconds') | int(20) -%}
+          {%- set limit = states('number.rf_cronometro_de_agua_2_irrigation_duration') | float(0) | int -%}
+          {%- set safety = states('input_number.potty_safety_minutes') | int(2) -%}
+          - Camera (Frigate): **{{ 'Offline' if is_state('binary_sensor.potty_cam_motion', 'unavailable') else 'Online' }}**
+          - Potty checks: **{{ 'Paused' if is_state('input_boolean.potty_pause_checks', 'on') else 'On' }}**
+          - Hose: **{{ 'Paused' if is_state('input_boolean.potty_pause_hose', 'on') else 'On' }}**, {{ states('valve.potty_valve') }}
+          - Last check: **{{ taken | timestamp_custom('%d/%m %H:%M') if taken else 'None yet' }}**
+          - Labeled photos: **{{ labeled.clean | default(0) }}** clean, **{{ labeled.poop | default(0) }}** poop
+          - Model: **{{ 'Trained' if state_attr('sensor.potty_labeled_photos', 'model') else 'Not trained yet' }}**
+          - Empty patio frames saved: **{{ state_attr('sensor.potty_labeled_photos', 'frames') | default(0) }}**
+          {% if limit and limit < rinse %}
+          <ha-alert alert-type="warning">The timer's own limit ({{ limit }} s) is shorter than the rinse ({{ rinse }} s), so the timer closes the hose early.</ha-alert>
+          {% endif %}
+          {%- if safety * 60 <= rinse %}
+          <ha-alert alert-type="warning">"Close any hose after" ({{ safety }} min) isn't longer than the rinse ({{ rinse }} s), so every rinse gets cut.</ha-alert>
+          {% endif %}
+
+      - type: entities
+        title: Switches
+        show_header_toggle: false
+        entities:
+          - entity: input_boolean.potty_pause_checks
+            secondary_info: last-changed
+          - entity: input_boolean.potty_pause_hose
+            secondary_info: last-changed
+          - entity: input_boolean.potty_pause_frames
+            secondary_info: last-changed
+
+      - type: entities
+        title: Timers
+        entities:
+          - type: section
+            label: Photo after a visit
+          - entity: input_number.potty_wait_after_dog
+            name: Wait after dog left
+          - entity: input_number.potty_give_up_minutes
+            name: Photo anyway after
+          - type: section
+            label: Rinse
+          - entity: input_number.potty_answer_window_minutes
+            name: Rinse answer window
+          - entity: input_number.potty_clear_wait_minutes
+            name: Wait for clear patio
+          - entity: input_number.potty_rinse_seconds
+            name: Rinse length
+          - type: section
+            label: Safety
+          - entity: input_number.potty_safety_minutes
+            name: Close any hose after
+          - entity: number.rf_cronometro_de_agua_2_irrigation_duration
+            name: Timer's own limit
+          - type: button
+            name: Reset timers to defaults
+            icon: mdi:restore
+            action_name: Reset
+            tap_action:
+              action: perform-action
+              perform_action: script.potty_reset_settings
+              confirmation:
+                text: "Reset the timers to 20 s, 3 min, 15 min, 5 min, 30 s and 2 min? The timer's own limit stays as it is."
+
+      - type: entities
+        title: Hose
+        entities:
+          - entity: valve.potty_valve
+            type: simple-entity
+            name: Hose
+          - type: button
+            name: Rinse the spot now
+            icon: mdi:water
+            action_name: Rinse
+            tap_action:
+              action: perform-action
+              perform_action: script.turn_on
+              target:
+                entity_id: script.potty_rinse
+              data:
+                variables:
+                  manual: true
+              confirmation:
+                text: Rinse now? It waits until no dog, person or motion is in view, and works even with the hose paused.
+
+      - type: markdown
+        title: About
+        content: |
+          The camera watches the patio where the dog does its business. After each visit, Home Assistant takes a photo of the floor and asks you on the phone whether there is poop. **Clean - rinse** washes the spot with the hose. **Poop** keeps the hose off so you can pick it up first. Every answer becomes a labeled photo. Once there are enough, a model will decide by itself and ask only when unsure.
+
+          ### How a visit goes
+          1. **Frigate**, on the Orange Pi's NPU, watches the Tapo camera for the dog, people and motion, and tells Home Assistant over MQTT.
+          2. The dog leaves. After **Wait after dog left** with no dog in view, and 20 s with nothing moving (set in Frigate), the **poop checker** saves a photo. If something keeps moving, the photo is taken anyway after **Photo anyway after**.
+          3. Your iPhone gets a notification. Tapping it opens the Photo tab. The History tab keeps the last 30 photos, where you can relabel or delete them.
+          4. **Clean - rinse**, within the **Rinse answer window**, opens the Tuya water timer for the **Rinse length**, but only once no dog, no person and nothing moves. It waits up to **Wait for clear patio**, then gives up and tells you. Anyone walking in during a rinse closes the hose at once.
+
+          ### Safety nets
+          - **Close any hose after**: Home Assistant closes the hose after this long, whoever opened it, Alexa and Smart Life included.
+          - **Timer's own limit**: the timer closes by itself after this, even if Home Assistant or the Tuya cloud fails. Keep it at least as long as the rinse.
+          - **Pause the hose**: no rinses from notifications or the model; answers only save labels. **Rinse the spot now** still works.
+          - **Pause potty checks**: no photos or notifications after visits, for example while cleaning the patio.
+
+          ### Where things live
+          Frigate, Home Assistant and the poop checker all run on the Orange Pi at home, and the photos stay on it. The hose is reached through the Tuya cloud. Deleted photos go to a recovery folder on the Pi. The code, the diagrams and the hardware notes are at [github.com/LGuillermoAngaritaG/orangepi-dog-potty](https://github.com/LGuillermoAngaritaG/orangepi-dog-potty).

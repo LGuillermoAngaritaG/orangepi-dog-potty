@@ -1,0 +1,7 @@
+[
+  {
+    "file": "abc123def456.jpg",
+    "box": [366, 544, 455, 577],
+    "note": "a labeled check photo's full frame in data/sources/; box is x1, y1, x2, y2 in pixels around the poop"
+  }
+]

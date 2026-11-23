@@ -1,0 +1,117 @@
+<mxfile host="gridgram" agent="improved-drawio">
+  <diagram name="Page-1" id="page1">
+    <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" math="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Rinse: when the hose may open, and what closes it" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;whiteSpace=wrap;align=left;verticalAlign=middle;fontStyle=1;fontSize=17;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="20" y="15" width="860" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="header_the_rinse" value="THE RINSE" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;whiteSpace=wrap;align=center;verticalAlign=middle;fontStyle=1;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="20" y="50" width="410" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="header_skips_and_safety_nets" value="SKIPS AND SAFETY NETS" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;whiteSpace=wrap;align=center;verticalAlign=middle;fontStyle=1;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="520" y="50" width="360" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="header_rule" value="" style="line;html=1;strokeWidth=1;strokeColor=#D1D5DB;" vertex="1" parent="1">
+          <mxGeometry x="20" y="68" width="860" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="box_rinse_asked" value="&lt;b&gt;Rinse asked&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;model said clean, a Clean answer,&lt;br&gt;or the Rinse now button&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="20" y="80" width="410" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="box_hose_paused" value="&lt;b&gt;Hose paused?&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;Settings switch; Rinse now ignores it&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="20" y="170" width="410" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="box_patio_clear" value="&lt;b&gt;Patio clear?&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;no dog, no person, no motion;&lt;br&gt;waits up to 5 minutes&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="20" y="260" width="410" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="box_hose_open" value="&lt;b&gt;Hose open&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;for the rinse length, 30 s;&lt;br&gt;noted in History&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="20" y="350" width="410" height="244" as="geometry" />
+        </mxCell>
+        <mxCell id="box_hose_closed" value="&lt;b&gt;Hose closed&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;History shows Rinsed&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="20" y="620" width="410" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="box_skipped" value="&lt;b&gt;Skipped&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;noted, phone told&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9AA3AF;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="520" y="170" width="360" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="box_skipped_2" value="&lt;b&gt;Skipped&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;noted, phone told&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9AA3AF;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="520" y="260" width="360" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="box_walk_in_stop" value="&lt;b&gt;Walk-in stop&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;dog or person appears:&lt;br&gt;closed at once&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FBE4E4;strokeColor=#B42318;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="520" y="350" width="360" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="box_safety_close" value="&lt;b&gt;Safety close&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;any open hose, Alexa too:&lt;br&gt;closed after 2 minutes&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FBE4E4;strokeColor=#B42318;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="520" y="440" width="360" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="box_timer_s_own_limit" value="&lt;b&gt;Timer&amp;#x27;s own limit&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;the valve closes itself after&lt;br&gt;30 s, even with no Pi or cloud&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FBE4E4;strokeColor=#B42318;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="520" y="530" width="360" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_rinse_asked_hose_paused" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_rinse_asked" target="box_hose_paused">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_hose_paused_patio_clear" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_hose_paused" target="box_patio_clear">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_hose_paused_patio_clear_label" value="no" vertex="1" connectable="0" parent="edge_hose_paused_patio_clear" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Helvetica;fontSize=11;fontColor=#5B6472;labelBackgroundColor=none;">
+          <mxGeometry x="0" y="21.72" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_hose_paused_skipped" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_hose_paused" target="box_skipped">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_hose_paused_skipped_label" value="yes" vertex="1" connectable="0" parent="edge_hose_paused_skipped" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Helvetica;fontSize=11;fontColor=#5B6472;labelBackgroundColor=none;">
+          <mxGeometry x="0" y="17.7" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_patio_clear_hose_open" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_patio_clear" target="box_hose_open">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_patio_clear_hose_open_label" value="yes" vertex="1" connectable="0" parent="edge_patio_clear_hose_open" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Helvetica;fontSize=11;fontColor=#5B6472;labelBackgroundColor=none;">
+          <mxGeometry x="0" y="24.58" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_patio_clear_skipped_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_patio_clear" target="box_skipped_2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_patio_clear_skipped_2_label" value="no" vertex="1" connectable="0" parent="edge_patio_clear_skipped_2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Helvetica;fontSize=11;fontColor=#5B6472;labelBackgroundColor=none;">
+          <mxGeometry x="0" y="17.7" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_hose_open_hose_closed" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_hose_open" target="box_hose_closed">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_walk_in_stop_hose_open" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.1311;entryDx=0;entryDy=0;dashed=1;dashPattern=4 3;" edge="1" parent="1" source="box_walk_in_stop" target="box_hose_open">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_safety_close_hose_open" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=4 3;" edge="1" parent="1" source="box_safety_close" target="box_hose_open">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_timer_s_own_limit_hose_open" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.8689;entryDx=0;entryDy=0;dashed=1;dashPattern=4 3;" edge="1" parent="1" source="box_timer_s_own_limit" target="box_hose_open">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_live" value="" style="rounded=1;absoluteArcSize=1;arcSize=6;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;" vertex="1" parent="1">
+          <mxGeometry x="20" y="708" width="20" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_text_live" value="Rinse steps" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;align=left;verticalAlign=middle;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="46" y="704" width="70.92" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_guard" value="" style="rounded=1;absoluteArcSize=1;arcSize=6;html=1;fillColor=#FBE4E4;strokeColor=#B42318;" vertex="1" parent="1">
+          <mxGeometry x="130.92" y="708" width="20" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_text_guard" value="Closes the hose on its own" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;align=left;verticalAlign=middle;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="156.92" y="704" width="156.72" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_plain" value="" style="rounded=1;absoluteArcSize=1;arcSize=6;html=1;fillColor=#FFFFFF;strokeColor=#9AA3AF;" vertex="1" parent="1">
+          <mxGeometry x="327.64" y="708" width="20" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_text_plain" value="Rinse skipped" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;align=left;verticalAlign=middle;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="353.64" y="704" width="82.36" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,23 @@
+default_config:
+
+homeassistant:
+  packages: !include_dir_named packages
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+# The History tab's card. Bump ?v= after changing the file, so phones reload it.
+frontend:
+  extra_module_url:
+    - /local/potty-history-card.js?v=5
+
+# The Potty page with the newest check photo (dashboards/potty.yaml).
+lovelace:
+  dashboards:
+    potty-check:
+      mode: yaml
+      filename: dashboards/potty.yaml
+      title: Potty
+      icon: mdi:dog-side
+      show_in_sidebar: true

@@ -1,0 +1,88 @@
+<mxfile host="gridgram" agent="improved-drawio">
+  <diagram name="Page-1" id="page1">
+    <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" math="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Finding a system disk that works" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;whiteSpace=wrap;align=left;verticalAlign=middle;fontStyle=1;fontSize=17;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="20" y="15" width="860" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="header_nov_10" value="NOV 10" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;whiteSpace=wrap;align=center;verticalAlign=middle;fontStyle=1;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="20" y="50" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="header_nov_11" value="NOV 11" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;whiteSpace=wrap;align=center;verticalAlign=middle;fontStyle=1;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="194" y="50" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="header_nov_11_2" value="NOV 11" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;whiteSpace=wrap;align=center;verticalAlign=middle;fontStyle=1;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="368" y="50" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="header_nov_11_to_20" value="NOV 11 TO 20" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;whiteSpace=wrap;align=center;verticalAlign=middle;fontStyle=1;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="542" y="50" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="header_nov_20" value="NOV 20" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;whiteSpace=wrap;align=center;verticalAlign=middle;fontStyle=1;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="716" y="50" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="header_rule" value="" style="line;html=1;strokeWidth=1;strokeColor=#D1D5DB;" vertex="1" parent="1">
+          <mxGeometry x="20" y="68" width="860" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="box_usb_2_0_stick" value="&lt;b&gt;USB 2.0 stick&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;73 KB/s writes; an OS update took 2 h 16 min&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FBE4E4;strokeColor=#B42318;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="20" y="80" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="box_unbranded_microsd" value="&lt;b&gt;Unbranded microSD&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;lost writes silently; root went read-only&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FBE4E4;strokeColor=#B42318;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="194" y="80" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="box_system_in_ram" value="&lt;b&gt;System in RAM&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;soft-reboot into tmpfs; DNS kept running&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9AA3AF;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="542" y="80" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="box_old_usb_hard_disk" value="&lt;b&gt;Old USB hard disk&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;4 MB/s, 789 pending sectors&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FBE4E4;strokeColor=#B42318;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="368" y="80" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="box_usb_3_ssd_128_gb" value="&lt;b&gt;USB 3 SSD, 128 GB&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;334 MB/s reads; runs everything&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="716" y="80" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="box_boot_loader_mix_up" value="&lt;b&gt;Boot loader mix-up&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;2017 factory SPL with 2026 U-Boot: fixed by writing Armbian&amp;#x27;s U-Boot to SPI&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="194" y="200" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="box_no_usb_only_boot" value="&lt;b&gt;No USB-only boot&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;SPI U-Boot won&amp;#x27;t start the SSD alone: the card keeps /boot&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="716" y="200" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_usb_2_0_stick_unbranded_microsd" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_usb_2_0_stick" target="box_unbranded_microsd">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_unbranded_microsd_old_usb_hard_d" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_unbranded_microsd" target="box_old_usb_hard_disk">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_old_usb_hard_disk_system_in_ram" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_old_usb_hard_disk" target="box_system_in_ram">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_system_in_ram_usb_3_ssd_128_gb" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_system_in_ram" target="box_usb_3_ssd_128_gb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_unbranded_microsd_boot_loader_mi" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_unbranded_microsd" target="box_boot_loader_mix_up">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_usb_3_ssd_128_gb_no_usb_only_boo" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_usb_3_ssd_128_gb" target="box_no_usb_only_boot">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_risk" value="" style="rounded=1;absoluteArcSize=1;arcSize=6;html=1;fillColor=#FBE4E4;strokeColor=#B42318;" vertex="1" parent="1">
+          <mxGeometry x="20" y="324" width="20" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_text_risk" value="Failed" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;align=left;verticalAlign=middle;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="46" y="320" width="42.32" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_plain" value="" style="rounded=1;absoluteArcSize=1;arcSize=6;html=1;fillColor=#FFFFFF;strokeColor=#9AA3AF;" vertex="1" parent="1">
+          <mxGeometry x="102.32" y="324" width="20" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_text_plain" value="Stopgap" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;align=left;verticalAlign=middle;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="128.32" y="320" width="48.04" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_live" value="" style="rounded=1;absoluteArcSize=1;arcSize=6;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;" vertex="1" parent="1">
+          <mxGeometry x="190.36" y="324" width="20" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_text_live" value="In use today" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;align=left;verticalAlign=middle;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="216.36" y="320" width="76.64" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

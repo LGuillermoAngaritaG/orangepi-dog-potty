@@ -1,0 +1,83 @@
+services:
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: homeassistant
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ}
+    volumes:
+      - ./homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: mosquitto
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+
+  frigate:
+    image: ghcr.io/blakeblackshear/frigate:stable-rk
+    container_name: frigate
+    network_mode: host
+    restart: unless-stopped
+    stop_grace_period: 30s
+
+    # Frigate's Rockchip docs use privileged mode during setup.
+    privileged: true
+    shm_size: 128mb
+    environment:
+      TZ: ${TZ}
+      FRIGATE_TAPO_IP: ${FRIGATE_TAPO_IP}
+      FRIGATE_TAPO_USER: ${FRIGATE_TAPO_USER}
+      FRIGATE_TAPO_PASSWORD: ${FRIGATE_TAPO_PASSWORD}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./frigate/config:/config
+      - ./frigate/media:/media/frigate
+      - type: tmpfs
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+
+  adguardhome:
+    image: adguard/adguardhome:latest
+    container_name: adguardhome
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./adguard/work:/opt/adguardhome/work
+      - ./adguard/conf:/opt/adguardhome/conf
+
+  poop-checker:
+    build: ./poop-checker
+    container_name: poop-checker
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ}
+      RTSP_URL: rtsp://127.0.0.1:8554/potty_cam
+      CROP: ${POTTY_CROP}
+    volumes:
+      - ./poop-checker/data:/data
+      - ./homeassistant/www/potty:/www
+
+  # Starts only with: docker compose --profile kvm up -d
+  one-kvm:
+    image: silentwind0/one-kvm
+    container_name: one-kvm
+    profiles: [kvm]
+    network_mode: host
+    privileged: true
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ}
+    volumes:
+      - /dev:/dev
+      - /sys:/sys
+      - /run/dbus:/run/dbus
+      - ./one-kvm-data:/etc/one-kvm

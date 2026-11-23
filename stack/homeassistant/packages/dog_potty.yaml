@@ -1,0 +1,614 @@
+# Dog potty flow: Frigate sees the dog, the poop checker photographs the floor
+# after it leaves, and the hose rinses a clean floor. Needs, in Home Assistant:
+#   - secrets.yaml with potty_notify_action and potty_echo_entity
+#     (see secrets.example.yaml),
+#   - the hose as valve.potty_valve or switch.potty_valve (rename the Tuya entity),
+#   - the MQTT integration on the same broker Frigate uses, camera potty_cam.
+
+input_boolean:
+  potty_visit:
+    name: Dog visited potty spot
+
+  # Settings tab of the Potty page. Off is normal operation.
+  potty_pause_checks:
+    name: Pause potty checks
+    icon: mdi:pause-circle
+  potty_pause_hose:
+    name: Pause the hose
+    icon: mdi:water-off
+  potty_pause_frames:
+    name: Pause saving empty patio frames
+    icon: mdi:image-off
+
+# Settings tab timers. No "initial", so changes survive restarts; the "Reset
+# timers" button (script.potty_reset_settings) sets the defaults.
+input_number:
+  potty_wait_after_dog:
+    name: Wait after the dog leaves
+    icon: mdi:timer-sand
+    min: 5
+    max: 120
+    step: 5
+    unit_of_measurement: s
+    mode: box
+  potty_give_up_minutes:
+    name: Take the photo anyway after
+    icon: mdi:timer-alert
+    min: 1
+    max: 15
+    step: 1
+    unit_of_measurement: min
+    mode: box
+  potty_rinse_seconds:
+    name: Rinse length
+    icon: mdi:water
+    min: 5
+    max: 120
+    step: 5
+    unit_of_measurement: s
+    mode: box
+  potty_clear_wait_minutes:
+    name: Wait for a clear patio before rinsing
+    icon: mdi:account-clock
+    min: 1
+    max: 30
+    step: 1
+    unit_of_measurement: min
+    mode: box
+  potty_answer_window_minutes:
+    name: Clean - rinse works for
+    icon: mdi:gesture-tap
+    min: 5
+    max: 120
+    step: 5
+    unit_of_measurement: min
+    mode: box
+  potty_safety_minutes:
+    name: Close any open hose after
+    icon: mdi:shield-alert
+    min: 1
+    max: 30
+    step: 1
+    unit_of_measurement: min
+    mode: box
+
+# The newest check photo, shown on the Potty page. A "Clean - rinse" answer
+# rinses only for this one, only once, and only within the answer window.
+input_text:
+  potty_last_shot:
+    name: Newest potty check photo
+    max: 32
+
+  # "" until answered, then clean or poop ("auto" when the model rinsed).
+  potty_last_answer:
+    name: Answer for the newest potty photo
+    max: 16
+
+input_datetime:
+  potty_last_check:
+    name: Newest potty check photo taken at
+    has_date: true
+    has_time: true
+
+# Dog anywhere in the camera's view, straight from Frigate over MQTT. Frigate
+# publishes the number of dogs it tracks on frigate/potty_cam/dog. This needs
+# no Frigate integration from HACS.
+mqtt:
+  binary_sensor:
+    - name: Potty cam dog occupancy
+      unique_id: potty_cam_dog_occupancy_mqtt
+      state_topic: frigate/potty_cam/dog
+      value_template: "{{ 'ON' if value | int(0) > 0 else 'OFF' }}"
+      device_class: occupancy
+      availability_topic: frigate/available
+      payload_available: online
+      payload_not_available: offline
+
+    # Anyone on the patio, so the hose never sprays a person.
+    - name: Potty cam person occupancy
+      unique_id: potty_cam_person_occupancy_mqtt
+      state_topic: frigate/potty_cam/person
+      value_template: "{{ 'ON' if value | int(0) > 0 else 'OFF' }}"
+      device_class: occupancy
+      availability_topic: frigate/available
+      payload_available: online
+      payload_not_available: offline
+
+    # Anything moving in view. Catches the dog when Frigate loses it (close to
+    # the lens, from behind). Frigate ignores small motion and sends OFF 20 s
+    # after the last movement.
+    - name: Potty cam motion
+      unique_id: potty_cam_motion_mqtt
+      state_topic: frigate/potty_cam/motion
+      device_class: motion
+      availability_topic: frigate/available
+      payload_available: online
+      payload_not_available: offline
+
+rest_command:
+  potty_check:
+    url: http://127.0.0.1:8099/check
+    method: post
+    timeout: 30
+  potty_label:
+    url: "http://127.0.0.1:8099/label?id={{ id }}&label={{ label }}"
+    method: post
+  potty_frame:
+    url: http://127.0.0.1:8099/frame
+    method: post
+    timeout: 30
+  potty_note:
+    url: "http://127.0.0.1:8099/note?id={{ id }}&event={{ event }}"
+    method: post
+  potty_delete:
+    url: "http://127.0.0.1:8099/delete?id={{ id }}"
+    method: post
+
+# The newest check photos with their answer and what the hose did, for the
+# History tab of the Potty page.
+rest:
+  - resource: http://127.0.0.1:8099/history?limit=30
+    scan_interval: 15
+    sensor:
+      - name: Potty history
+        unique_id: potty_history_rest
+        value_template: "{{ value_json['items'] | length }}"
+        json_attributes:
+          - items
+
+  # Labeled photo counts and model status, for the Settings tab.
+  - resource: http://127.0.0.1:8099/health
+    scan_interval: 60
+    sensor:
+      - name: Potty labeled photos
+        unique_id: potty_labeled_rest
+        value_template: "{{ value_json.labeled.clean + value_json.labeled.poop }}"
+        json_attributes:
+          - labeled
+          - model
+          - frames
+
+script:
+  potty_notify:
+    alias: Potty - phone notification
+    fields:
+      message: {}
+      extra: {}
+    sequence:
+
+      # The phone's notify action, for example notify.mobile_app_my_phone
+      # (Developer tools > Actions lists it), set in secrets.yaml.
+      - action: !secret potty_notify_action
+        data:
+          title: Dog potty
+          message: "{{ message }}"
+          data: "{{ extra | default({}) }}"
+
+  potty_valve:
+    alias: Potty - open or close the hose
+    fields:
+      open: {}
+    variables:
+      valve: "{{ 'valve.potty_valve' if states.valve.potty_valve is not none else 'switch.potty_valve' }}"
+    sequence:
+      - action: >-
+          {% if valve.startswith('valve.') %}valve.{{ 'open_valve' if open else 'close_valve' }}{% else %}switch.turn_{{ 'on' if open else 'off' }}{% endif %}
+        target:
+          entity_id: "{{ valve }}"
+
+  potty_rinse:
+    alias: Potty - rinse the spot
+    mode: single
+    fields:
+      shot:
+        description: The check photo this rinse is for, noted in the history. Optional.
+      manual:
+        description: true for the Settings tab's "Rinse now", which works even with the hose paused.
+    variables:
+      photo: "{{ shot | default('') }}"
+      clear_wait_minutes: "{{ states('input_number.potty_clear_wait_minutes') | int(5) }}"
+    sequence:
+      - if: "{{ is_state('input_boolean.potty_pause_hose', 'on') and not (manual | default(false)) }}"
+        then:
+          - if: "{{ photo != '' }}"
+            then:
+              - action: rest_command.potty_note
+                data:
+                  id: "{{ photo }}"
+                  event: rinse_paused
+                continue_on_error: true
+          - action: script.potty_notify
+            data:
+              message: The hose is paused in the Potty settings, so it didn't rinse.
+          - stop: Hose paused
+
+      # Never spray the dog or a person, nor while anything moves (a dog
+      # Frigate lost track of). Frigate doesn't keep these on the MQTT server,
+      # so after a Home Assistant restart the sensors read "unknown" until
+      # something happens: that counts as clear. "unavailable" means Frigate is
+      # down and can't see, so that doesn't.
+      - wait_template: >-
+          {{ states('binary_sensor.potty_cam_dog_occupancy') in ['off', 'unknown']
+             and states('binary_sensor.potty_cam_person_occupancy') in ['off', 'unknown']
+             and states('binary_sensor.potty_cam_motion') in ['off', 'unknown'] }}
+        timeout: "{{ clear_wait_minutes * 60 }}"
+        continue_on_timeout: true
+      - if: "{{ not wait.completed }}"
+        then:
+          - if: "{{ photo != '' }}"
+            then:
+              - action: rest_command.potty_note
+                data:
+                  id: "{{ photo }}"
+                  event: rinse_skipped
+                continue_on_error: true
+          - action: script.potty_notify
+            data:
+              message: "Skipped the rinse. The patio wasn't clear for {{ clear_wait_minutes }} minutes, or the camera is down."
+          - stop: Patio not clear
+
+      # "rinse_open" without a later "rinsed" shows in the history as stopped
+      # early (someone walked in).
+      - if: "{{ photo != '' }}"
+        then:
+          - action: rest_command.potty_note
+            data:
+              id: "{{ photo }}"
+              event: rinse_open
+            continue_on_error: true
+      # Rinse length from the Settings tab. The timer's own Irrigation duration
+      # closes the valve by itself if this script or the Tuya cloud fails.
+      - action: script.potty_valve
+        data:
+          open: true
+      - delay:
+          seconds: "{{ states('input_number.potty_rinse_seconds') | int(20) }}"
+      - action: script.potty_valve
+        data:
+          open: false
+      - if: "{{ photo != '' }}"
+        then:
+          - action: rest_command.potty_note
+            data:
+              id: "{{ photo }}"
+              event: rinsed
+            continue_on_error: true
+
+  # An answer from a notification button or from the Potty page. Answers to
+  # older photos only file the label: on 2026-11-22, six taps on old
+  # notifications ran the hose six times in a row.
+  potty_handle_answer:
+    alias: Potty - answer for a photo
+    mode: queued
+    fields:
+      answer:
+        description: RINSE (clean, and rinse if it's the newest photo), CLEAN (label only, from the History tab) or POOP
+      shot:
+        description: Photo id. The newest photo when left out.
+    variables:
+      photo: "{{ shot if shot is defined and shot else states('input_text.potty_last_shot') }}"
+      newest: "{{ photo == states('input_text.potty_last_shot') }}"
+      fresh: >-
+        {{ newest and states('input_text.potty_last_answer') == ''
+           and now().timestamp() - (state_attr('input_datetime.potty_last_check', 'timestamp') or 0)
+               < states('input_number.potty_answer_window_minutes') | int(15) * 60 }}
+    sequence:
+      - condition: "{{ answer in ['RINSE', 'CLEAN', 'POOP'] and photo not in ['', 'unknown'] }}"
+      - action: rest_command.potty_label
+        data:
+          id: "{{ photo }}"
+          label: "{{ 'poop' if answer == 'POOP' else 'clean' }}"
+        continue_on_error: true
+      - if: "{{ newest }}"
+        then:
+          - action: input_text.set_value
+            target:
+              entity_id: input_text.potty_last_answer
+            data:
+              value: "{{ 'poop' if answer == 'POOP' else 'clean' }}"
+
+      # Started, not awaited, so the page's button returns at once.
+      - if: "{{ answer == 'RINSE' and fresh }}"
+        then:
+          - action: script.turn_on
+            target:
+              entity_id: script.potty_rinse
+            data:
+              variables:
+                shot: "{{ photo }}"
+      - action: homeassistant.update_entity
+        target:
+          entity_id: sensor.potty_history
+        continue_on_error: true
+
+  # Delete from the History tab. The checker moves the files to its
+  # data/deleted/<id>/ folder, so they leave the history and the training set
+  # but can be put back by hand.
+  potty_delete_photo:
+    alias: Potty - delete a photo
+    mode: queued
+    fields:
+      shot:
+        description: Photo id.
+    sequence:
+      - condition: "{{ shot is defined and shot | regex_match('^[0-9a-f]+$') }}"
+      - action: rest_command.potty_delete
+        data:
+          id: "{{ shot }}"
+        response_variable: result
+      - if: "{{ result.status != 200 }}"
+        then:
+          - stop: The checker didn't delete the photo
+            error: true
+      - if: "{{ shot == states('input_text.potty_last_shot') }}"
+        then:
+          - action: input_text.set_value
+            target:
+              entity_id: input_text.potty_last_shot
+            data:
+              value: ""
+      - action: homeassistant.update_entity
+        target:
+          entity_id: sensor.potty_history
+        continue_on_error: true
+
+  # The Settings tab's "Reset timers" button, also run once to set the
+  # timers after they were first added (2026-11-23).
+  potty_reset_settings:
+    alias: Potty - reset timers to defaults
+    sequence:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.potty_wait_after_dog
+        data:
+          value: 20
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.potty_give_up_minutes
+        data:
+          value: 3
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.potty_rinse_seconds
+        data:
+          value: 30
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.potty_clear_wait_minutes
+        data:
+          value: 5
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.potty_answer_window_minutes
+        data:
+          value: 15
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.potty_safety_minutes
+        data:
+          value: 2
+
+automation:
+  # The dog can go anywhere in view, so a visit is any dog sighting. Frigate
+  # tracks a moving dog in pieces of a few seconds (3 s and 4 s on its first
+  # real visit, 2026-11-21 07:05), so a minimum duration here misses visits.
+  - id: potty_visit_start
+    alias: Potty - dog at the spot
+    triggers:
+      - trigger: state
+        entity_id: binary_sensor.potty_cam_dog_occupancy
+        to: "on"
+    conditions:
+      - condition: state
+        entity_id: input_boolean.potty_pause_checks
+        state: "off"
+    actions:
+      - action: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.potty_visit
+
+  - id: potty_visit_end
+    alias: Potty - dog left, check the spot
+    mode: single
+    variables:
+      poop_alert: 0.5
+      rinse_max: 0.05
+      wait_after_dog: "{{ states('input_number.potty_wait_after_dog') | int(20) }}"
+    # The photo waits with no dog in view (Settings: "Wait after the dog
+    # leaves", 20 s) AND no motion (Frigate's "motion off" comes 20 s after the
+    # last movement). Frigate loses the dog at times, close to the lens or from
+    # behind, and twice on 2026-11-22 the photo caught the dog still standing
+    # there. A moving dog keeps motion on.
+    triggers:
+      - trigger: state
+        entity_id: binary_sensor.potty_cam_dog_occupancy
+        to: "off"
+        for:
+          seconds: "{{ states('input_number.potty_wait_after_dog') | int(20) }}"
+      - trigger: state
+        entity_id: binary_sensor.potty_cam_motion
+        to: "off"
+
+      # Motion that never settles (rain, insects at the night lights) must not
+      # hold the check back forever.
+      - trigger: state
+        entity_id: binary_sensor.potty_cam_dog_occupancy
+        to: "off"
+        for:
+          minutes: "{{ states('input_number.potty_give_up_minutes') | int(3) }}"
+        id: give_up_waiting
+    conditions:
+      - condition: state
+        entity_id: input_boolean.potty_visit
+        state: "on"
+
+      # One second of slack: the trigger above fires right at the mark.
+      - >-
+        {{ is_state('binary_sensor.potty_cam_dog_occupancy', 'off')
+           and (now() - states.binary_sensor.potty_cam_dog_occupancy.last_changed).total_seconds() >= wait_after_dog - 1 }}
+      - "{{ trigger.id == 'give_up_waiting' or states('binary_sensor.potty_cam_motion') in ['off', 'unknown'] }}"
+    actions:
+      - action: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.potty_visit
+      - action: rest_command.potty_check
+        response_variable: result
+        continue_on_error: true
+      - if: "{{ result is not defined or result.status != 200 }}"
+        then:
+          - action: script.potty_notify
+            data:
+              message: The dog used the spot, but the poop check failed. Look at the spot yourself.
+          - stop: Poop checker unavailable
+      - variables:
+          shot: "{{ result.content.id }}"
+          verdict: >-
+            {% set p = result.content.poop_prob %}{{ 'ask' if p is none else 'poop' if p >= poop_alert else 'clean' if p <= rinse_max else 'ask' }}
+
+          # No photo in the notification: the iPhone never downloaded it.
+          # Tapping it opens the Potty page, which shows the photo.
+          answer_buttons:
+            url: /potty-check/photo
+            actions:
+              - action: "POTTY_RINSE_{{ result.content.id }}"
+                title: Clean - rinse
+              - action: "POTTY_POOP_{{ result.content.id }}"
+                title: Poop
+      - action: input_text.set_value
+        target:
+          entity_id: input_text.potty_last_shot
+        data:
+          value: "{{ shot }}"
+      - action: input_text.set_value
+        target:
+          entity_id: input_text.potty_last_answer
+        data:
+          value: "{{ 'auto' if verdict == 'clean' else '' }}"
+      - action: input_datetime.set_datetime
+        target:
+          entity_id: input_datetime.potty_last_check
+        data:
+          timestamp: "{{ now().timestamp() }}"
+      - choose:
+          - conditions: "{{ verdict == 'poop' }}"
+            sequence:
+              - action: script.potty_notify
+                data:
+                  message: Poop on the floor. The hose stayed off. Tap to see the photo.
+                  extra: "{{ answer_buttons }}"
+
+              # Alexa Media Player (HACS) may not be installed. A missing action
+              # stops the automation even with continue_on_error, so check first,
+              # and only after the phone has been told.
+              - if: "{{ integration_entities('alexa_media') | count > 0 }}"
+                then:
+                  - action: notify.alexa_media
+                    data:
+                      target: !secret potty_echo_entity
+                      message: Heads up. The dog pooped on the floor.
+                      data:
+                        type: announce
+                    continue_on_error: true
+          - conditions: "{{ verdict == 'clean' }}"
+            sequence:
+              - action: script.potty_rinse
+                data:
+                  shot: "{{ shot }}"
+        default:
+          - action: script.potty_notify
+            data:
+              message: The dog used the spot. Is there poop? Tap to see the photo.
+              extra: "{{ answer_buttons }}"
+
+  - id: potty_answer
+    alias: Potty - answer from the phone
+    mode: queued
+    triggers:
+      - trigger: event
+        event_type: mobile_app_notification_action
+    # Other apps' actions (and the iOS "LOADING" placeholder) don't have the
+    # POTTY_<answer>_<photo> shape, so they are skipped without errors.
+    variables:
+      parts: "{{ (trigger.event.data.action | default('')).split('_') }}"
+    conditions:
+      - "{{ parts | length == 3 and parts[0] == 'POTTY' and parts[1] in ['RINSE', 'POOP'] }}"
+    actions:
+      - action: script.potty_handle_answer
+        data:
+          answer: "{{ parts[1] }}"
+          shot: "{{ parts[2] }}"
+
+  # The dog or a person walks in during an automatic rinse: stop it at once.
+  # Only during the rinse: when someone opens the hose by hand (Alexa, Smart
+  # Life), that person is on the patio, and on 2026-11-22/23 this closed every
+  # Alexa "open the faucet" within 1 to 4 seconds.
+  - id: potty_valve_stop_for_visitor
+    alias: Potty - close the hose when someone walks in
+    triggers:
+      - trigger: state
+        entity_id:
+          - binary_sensor.potty_cam_dog_occupancy
+          - binary_sensor.potty_cam_person_occupancy
+        to: "on"
+    conditions:
+      - "{{ is_state('script.potty_rinse', 'on') }}"
+      - "{{ is_state('valve.potty_valve', 'open') or is_state('switch.potty_valve', 'on') }}"
+    actions:
+      - action: script.turn_off
+        target:
+          entity_id: script.potty_rinse
+      - action: script.potty_valve
+        data:
+          open: false
+
+  # Any open hose, also one opened with Alexa or Smart Life (Settings: "Close
+  # any open hose after", 2 min).
+  - id: potty_valve_safety
+    alias: Potty - close a stuck hose
+    triggers:
+      - trigger: template
+        value_template: "{{ is_state('switch.potty_valve', 'on') or is_state('valve.potty_valve', 'open') }}"
+        for:
+          minutes: "{{ states('input_number.potty_safety_minutes') | int(2) }}"
+    actions:
+      - action: script.potty_valve
+        data:
+          open: false
+      - action: script.potty_notify
+        data:
+          message: "The hose was open for {{ states('input_number.potty_safety_minutes') | int(2) }} minutes, so Home Assistant closed it."
+
+  # Every 30 min, a frame of the empty patio for synthetic training images.
+  # Skipped while a dog or person is in view or a visit is open, because the
+  # dog isn't always detected up close.
+  - id: potty_collect_frames
+    alias: Potty - save an empty patio frame
+    triggers:
+      - trigger: time_pattern
+        minutes: "/30"
+    conditions:
+      - condition: state
+        entity_id: input_boolean.potty_pause_frames
+        state: "off"
+      - condition: state
+        entity_id: input_boolean.potty_visit
+        state: "off"
+      - "{{ states('binary_sensor.potty_cam_dog_occupancy') in ['off', 'unknown'] }}"
+      - "{{ states('binary_sensor.potty_cam_person_occupancy') in ['off', 'unknown'] }}"
+      - "{{ states('binary_sensor.potty_cam_motion') in ['off', 'unknown'] }}"
+      - condition: template
+        value_template: >-
+          {{ (now() - states.binary_sensor.potty_cam_dog_occupancy.last_changed).total_seconds() > 300 }}
+    actions:
+      - action: rest_command.potty_frame
+        continue_on_error: true
+
+  - id: potty_alexa_relogin
+    alias: Potty - Alexa needs a new login
+    triggers:
+      - trigger: event
+        event_type: alexa_media_relogin_required
+    actions:
+      - action: script.potty_notify
+        data:
+          message: Alexa Media Player lost its Amazon login. Poop announcements stay off until you log in again.

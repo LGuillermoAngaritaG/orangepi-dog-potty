@@ -1,0 +1,79 @@
+<mxfile host="gridgram" agent="improved-drawio">
+  <diagram name="Page-1" id="page1">
+    <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" math="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="One dog visit, from sighting to rinse" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;whiteSpace=wrap;align=left;verticalAlign=middle;fontStyle=1;fontSize=17;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="20" y="15" width="860" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="box_dog_in_view" value="&lt;b&gt;Dog in view&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;Frigate on the NPU opens a visit&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="320" y="50" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="box_dog_gone_patio_still" value="&lt;b&gt;Dog gone, patio still&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;no dog for 20 s and no motion,&lt;br&gt;or 3 minutes at most&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="320" y="156" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="box_check_photo" value="&lt;b&gt;Check photo&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;floor cropped to 640 px,&lt;br&gt;full frame kept too&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="320" y="262" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="box_poop_model" value="&lt;b&gt;Poop model&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;YOLO11n classifier, ONNX on the CPU: poop probability&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FCEFD5;strokeColor=#B7791F;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="20" y="368" width="850" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="box_poop_0_5_or_more" value="&lt;b&gt;Poop, 0.5 or more&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;phone alert and Alexa;&lt;br&gt;hose stays off&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FCEFD5;strokeColor=#B7791F;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="20" y="474" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="box_clean_0_05_or_less" value="&lt;b&gt;Clean, 0.05 or less&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;rinse right away&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FCEFD5;strokeColor=#B7791F;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="320" y="474" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="box_not_sure_or_no_model" value="&lt;b&gt;Not sure, or no model&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;phone: Clean or Poop?&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="620" y="474" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="box_rinse" value="&lt;b&gt;Rinse&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;only on an empty patio&lt;br&gt;(next diagram)&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="320" y="580" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="box_your_answer" value="&lt;b&gt;Your answer&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5B6472&quot; style=&quot;font-size:11px&quot;&gt;labels the photo; Clean for the&lt;br&gt;newest one, within 15 min, rinses&lt;/font&gt;" style="rounded=1;absoluteArcSize=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;strokeWidth=1.2;fontFamily=Helvetica;fontSize=13;fontColor=#1F2937;spacing=6;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="620" y="580" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_dog_in_view_dog_gone_patio_still" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_dog_in_view" target="box_dog_gone_patio_still">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_dog_gone_patio_still_check_photo" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_dog_gone_patio_still" target="box_check_photo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_check_photo_poop_model" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_check_photo" target="box_poop_model">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_poop_model_poop_0_5_or_more" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0.1471;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_poop_model" target="box_poop_0_5_or_more">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_poop_model_clean_0_05_or_less" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_poop_model" target="box_clean_0_05_or_less">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_poop_model_not_sure_or_no_model" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0.8529;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_poop_model" target="box_not_sure_or_no_model">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_clean_0_05_or_less_rinse" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_clean_0_05_or_less" target="box_rinse">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_not_sure_or_no_model_your_answer" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_not_sure_or_no_model" target="box_your_answer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_your_answer_rinse" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F2937;strokeWidth=1.2;endArrow=block;endFill=1;endSize=5;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="box_your_answer" target="box_rinse">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_live" value="" style="rounded=1;absoluteArcSize=1;arcSize=6;html=1;fillColor=#E4F2E6;strokeColor=#3C8D4B;" vertex="1" parent="1">
+          <mxGeometry x="20" y="674" width="20" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_text_live" value="Running today" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;align=left;verticalAlign=middle;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="46" y="670" width="82.36" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_built" value="" style="rounded=1;absoluteArcSize=1;arcSize=6;html=1;fillColor=#FCEFD5;strokeColor=#B7791F;" vertex="1" parent="1">
+          <mxGeometry x="142.36" y="674" width="20" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_text_built" value="Built, waits for a trained model" style="text;html=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;align=left;verticalAlign=middle;fontSize=11;fontColor=#5B6472;" vertex="1" parent="1">
+          <mxGeometry x="168.36" y="670" width="191.04" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
