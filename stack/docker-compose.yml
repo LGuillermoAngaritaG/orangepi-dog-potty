@@ -29,7 +29,7 @@ services:
 
     # Frigate's Rockchip docs use privileged mode during setup.
     privileged: true
-    shm_size: 128mb
+    shm_size: 256mb # Frigate asks for about 146 MB at 1280x720
     environment:
       TZ: ${TZ}
       FRIGATE_TAPO_IP: ${FRIGATE_TAPO_IP}

@@ -35,8 +35,9 @@ everything running:
 | Mosquitto | 7 MB | idle |
 | **Whole system** | **1.8 GB of 7.7 GB** | load average 0.3 to 0.5 |
 
-Frigate also gets a RAM disk of up to 1 GB for its cache and 128 MB of shared memory, mostly
-unused because recording is off. The board stayed at 32 °C.
+Frigate also gets a RAM disk of up to 1 GB for its cache, mostly unused because recording is
+off, and 256 MB of shared memory for camera frames (it asks for about 146 MB at 1280x720 and
+warned at every start with 128 MB). The board stayed at 32 °C.
 
 So a 4 GB board would run today's stack, with little room for Home Assistant updates,
 Frigate building its image cache, or the KVM container. 8 GB leaves plenty.

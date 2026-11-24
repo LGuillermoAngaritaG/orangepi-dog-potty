@@ -48,6 +48,19 @@ not clear.
 Frigate's motion settings matter here: `contour_area: 25` ignores insects and leaves, and a
 mask hides the camera's clock. There is no zone: the dog can use any part of the floor.
 
+Our dog is white and fluffy on a light floor, and the COCO model was unsure of her: per-frame
+scores of 0.52 to 0.87, and some visits never reached Frigate's default threshold of 0.7, so
+no visit opened. Two settings in `frigate/config/config.yml` fix that:
+
+- `model.labelmap` renames cat, sheep, bear and teddy bear to `dog`. A white fluffy dog is
+  often read as one of them, and the rename keeps a single `dog` count for Home Assistant.
+- `objects.filters.dog` lowers the threshold to 0.55 (`min_score` 0.45). People keep 0.7.
+
+A lower threshold costs, at worst, a question about an empty floor. Motion alone was tried on
+paper and rejected: sun, clouds and insects started 20 to 25 motion episodes a day against
+about 4 visits. `tools/host/visit-report.py` lists motion episodes with no dog sighting, to
+spot visits that are still missed.
+
 ## Poop checker API
 
 A small Python HTTP server (`stack/poop-checker/app.py`, standard library plus OpenCV and

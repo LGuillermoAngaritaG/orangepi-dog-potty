@@ -6,7 +6,7 @@
 
 | Step | Rule | Why |
 | --- | --- | --- |
-| Visit starts | Any dog sighting, anywhere in view | Frigate tracks a moving dog in pieces of 3 to 4 s, so a minimum time missed the first real visit |
+| Visit starts | Any dog sighting, anywhere in view, at a score of 0.55 or more | Frigate tracks a moving dog in pieces of 3 to 4 s, so a minimum time missed the first real visit |
 | Photo waits | No dog for 20 s **and** Frigate's motion off | Twice the photo caught the dog still standing there, close to the lens, where Frigate had lost it. A moving dog keeps motion on |
 | Photo anyway | 3 minutes after the last dog sighting | Rain or insects at the night lights must not hold the check back forever |
 | Poop | Model says 0.5 or more | Phone alert, Alexa if installed. The hose stays off |

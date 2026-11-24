@@ -82,7 +82,7 @@ stack/                     the folder that runs on the Pi
   training/train.py        trains the classifier on a PC and exports model.onnx
 tools/
   synth/                   synthetic training images (poop and decoys on real floor frames)
-  host/                    Pi setup helpers: Docker install, AdGuard tuning, disk checks
+  host/                    Pi helpers: Docker install, AdGuard tuning, disk checks, missed-visit report
 docs/                      hardware, architecture, pipelines, setup, diagrams
 ```
 

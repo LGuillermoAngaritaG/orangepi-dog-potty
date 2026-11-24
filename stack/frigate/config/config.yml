@@ -20,6 +20,14 @@ model:
   height: 320
   input_tensor: nhwc
   labelmap_path: /labelmap/coco-80.txt
+  # Our dog is white and fluffy on a light floor, and the model often reads her
+  # as something else. These classes are renamed to dog, so Frigate tracks them
+  # and Home Assistant sees a single "dog" count.
+  labelmap:
+    15: dog # cat
+    18: dog # sheep
+    21: dog # bear
+    77: dog # teddy bear
 
 ffmpeg:
   hwaccel_args: preset-rkmpp
@@ -36,6 +44,13 @@ objects:
   track:
     - dog
     - person
+  # The dog scored 0.52 to 0.87 per frame, and visits whose running score never
+  # reached the default 0.7 were missed. A missed visit costs more than a
+  # question about an empty floor. People keep the default 0.7.
+  filters:
+    dog:
+      min_score: 0.45
+      threshold: 0.55
 
 record:
   enabled: false
